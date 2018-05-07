@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Listagem de Todos os Produtos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://nedbatchelder.com/pix/django-icon-256.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
+<body>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-md-8">
+                <center><h3>Listagem de todos os produtos</h3></center>
+                <br>
+                
+                {% if produtos.count > 0 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Editar produto</th>
+                                <th scope="col">Apagar produto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produto in produtos %}
+                                <tr>
+                                    <td>{{produto.nome}}</td>
+                                    <td>{{produto.preco}}</td>
+                                    <td>{{produto.descricao}}</td>
+                                    <td><center><a href="{% url 'update_produto' produto.id %}" class="btn btn-primary btn-block">Editar</a></center></td>
+                                    <td><center>
+                                        <a href="{% url 'delete_produto' produto.id %}" class="btn btn-danger btn-block">Excluir</a>
+                                        </center></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <center><h3>Não existem produtos cadastrados</h3></center>
+                <br><br>
+                {% endif %}
+                <a href="{% url 'criar_novo_produto'%}" class="btn btn-success btn-block">Adicionar novo produto</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
